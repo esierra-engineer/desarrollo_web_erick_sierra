@@ -25,3 +25,22 @@ footer {
     width: 100%;
     bottom: 0;
 }
+
+.div-table {
+    display: table;         
+    width: auto;         
+    background-color: #f4f4f4;         
+    border: 1px solid #333;         
+    border-spacing: 5px; /* cellspacing:poor IE support for  this */
+  }
+  .div-table-row {
+    display: table-row;
+    width: auto;
+    clear: both;
+  }
+  .div-table-col {
+    float: left; /* fix for  buggy browsers */
+    display: table-column;         
+    width: 200px;         
+    background-color: #f4f4f4;
+  }
