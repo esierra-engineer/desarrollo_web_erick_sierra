@@ -50,7 +50,7 @@
             <option value="">Seleccione</option>
           </select>
 
-          <div name="contact-input" id="contact-input"></div>
+          <div id="contact-input"></div>
           
         </div>
         <div>
@@ -59,26 +59,28 @@
           <input type="datetime-local" id="input-init-date" name="input-init-date" required>
 
         <label>Dia Hora Termino</label>
-        <input type="datetime-local" id="input-end-date", name="input-end-date">
+        <input type="datetime-local" id="input-end-date" name="input-end-date">
 
         <label>Descripcion</label>
         <textarea cols="50" rows="10"></textarea>
 
         <label>Tema</label>
-        <select id="select-tema" name="select-tema" required></select>
+        <select id="select-tema" name="select-tema" required>
+          <option label="Selexione"></option>
+        </select>
 
-        <div name="tema-input" id="tema-input"></div>
+        <div id="tema-input"></div>
 
         <label>Foto</label>
         <input type="file" required>
 
         </div>
         <div>
-          <h1></h1>
+          <br>
           <button id="btn-submit" name="btn-submit" type="submit">Agregar esta actividad</button>
         </div>
 
-        <div id="div-btn-goback" name="div-btn-goback">
+        <div id="div-btn-goback">
           
         </div>
 
@@ -87,7 +89,8 @@
     <footer>
         &copy; 2025 Mi Página
     </footer>
-</body>
+
 <script src="../js/region_comuna.js"></script> 
 <script src="../js/select.js"></script> 
+</body>
 </html>
