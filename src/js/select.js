@@ -39,9 +39,9 @@
     let contactSelect = document.getElementById("select-contact");
     contact_options.forEach(opt => {
         let option = document.createElement("option");
-        option.value = opt
-        option.text = opt
-        contactSelect.appendChild(option)
+        option.value = opt;
+        option.text = opt;
+        contactSelect.appendChild(option);
     })
   }
 
@@ -50,13 +50,13 @@
 
     if(!document.getElementById("contact-text-input")){
         let inputText = document.createElement("input");
-        let inputLabel = document.createElement("label")
+        let inputLabel = document.createElement("label");
 
-        inputText.setAttribute("id", "contact-text-input")
-        inputText.setAttribute("maxlength", "50")
+        inputText.setAttribute("id", "contact-text-input");
+        inputText.setAttribute("maxlength", "50");
         
-        inputLabel.setAttribute("for", "contact-text-input")
-        inputLabel.innerText = "Usuario: "
+        inputLabel.setAttribute("for", "contact-text-input");
+        inputLabel.innerText = "Usuario: ";
         
         contactSelect.appendChild(inputLabel);
         contactSelect.appendChild(inputText);
@@ -69,13 +69,13 @@
 
     if(!document.getElementById("tema-text-input")){
         let inputText = document.createElement("input");
-        let inputLabel = document.createElement("label")
+        let inputLabel = document.createElement("label");
 
-        inputText.setAttribute("id", "tema-text-input")
-        inputText.setAttribute("maxlength", "15")
+        inputText.setAttribute("id", "tema-text-input");
+        inputText.setAttribute("maxlength", "15");
         
-        inputLabel.setAttribute("for", "tema-text-input")
-        inputLabel.innerText = "Otro Tema: "
+        inputLabel.setAttribute("for", "tema-text-input");
+        inputLabel.innerText = "Otro Tema: ";
         
         contactSelect.appendChild(inputLabel);
         contactSelect.appendChild(inputText);
@@ -88,21 +88,21 @@
     let themeSelect = document.getElementById("select-tema");
     theme_options.forEach(opt => {
         let option = document.createElement("option");
-        option.value = opt
-        option.text = opt
-        themeSelect.appendChild(option)
+        option.value = opt;
+        option.text = opt;
+        themeSelect.appendChild(option);
     })
   }
 
   function submit(){
-     alert("Hemos recibido su información, muchas gracias y suerte en su actividad")
+     alert("Hemos recibido su información, muchas gracias y suerte en su actividad");
   }
 
   function setInitialValues(){
     //alert("setting initial values");
 
-    const init_date = document.getElementById("input-init-date")
-    const end_date = document.getElementById("input-end-date")
+    const init_date = document.getElementById("input-init-date");
+    const end_date = document.getElementById("input-end-date");
 
     let now = new Date();
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
@@ -123,12 +123,12 @@
             $(this).dialog("close");
             if (!document.getElementById("btn-go-back")){
               submit()
-              const goBackButton = document.createElement("button")
-              goBackButton.setAttribute("id", "btn-go-back")
-              goBackButton.setAttribute("onclick", "window.location='index.html'")
-              goBackButton.innerText = "Volver Atrás"
+              const goBackButton = document.createElement("button");
+              goBackButton.setAttribute("id", "btn-go-back");
+              goBackButton.setAttribute("onclick", "window.location='index.html'");
+              goBackButton.innerText = "Volver Atrás";
   
-              document.getElementById("div-btn-goback").appendChild(goBackButton)
+              document.getElementById("div-btn-goback").appendChild(goBackButton);
             }
           },
           "No, no estoy seguro": function() {
