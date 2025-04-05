@@ -1,37 +1,37 @@
-  const poblarDepartamentos = () => {
-    let departmentSelect = document.getElementById("select-region");
-    for (const department in region_comuna.regiones) {
+  const poblarRegiones = () => {
+    let comunaSelect = document.getElementById("select-region");
+    for (const comuna in region_comuna.regiones) {
         let option = document.createElement("option");
 
         // alert(department);
-        option.value = department;
-        option.text = region_comuna.regiones[department].nombre;
-        departmentSelect.appendChild(option);
+        option.value = comuna;
+        option.text = region_comuna.regiones[comuna].nombre;
+        comunaSelect.appendChild(option);
     }
   };
   
-  const updateCursos = () => {
-    let departmentSelect = document.getElementById("select-region");
-    let courseSelect = document.getElementById("select-comuna");
-    let selectedDepartment = departmentSelect.value;
+  const updateComunas = () => {
+    let regionSelect = document.getElementById("select-region");
+    let comunaSelect = document.getElementById("select-comuna");
+    let selectedRegion = regionSelect.value;
     
-    courseSelect.innerHTML = '<option value="">Seleccione una comuna</option>';
+    comunaSelect.innerHTML = '<option value="">Seleccione una comuna</option>';
 
     //alert(region_comuna.regiones[selectedDepartment].nombre);
     
-    if (region_comuna.regiones[selectedDepartment]) {
-        region_comuna.regiones[selectedDepartment].comunas.forEach(comuna => {
+    if (region_comuna.regiones[selectedRegion]) {
+        region_comuna.regiones[selectedRegion].comunas.forEach(comuna => {
             let option = document.createElement("option");
             option.value = comuna.nombre;
             option.text = comuna.nombre;
-            courseSelect.appendChild(option);
+            comunaSelect.appendChild(option);
         });
     }
     changeArguments();
   };
   
   function changeArguments() {
-    const courseSelect = document.getElementById("select-course");
+    const comunaSelect = document.getElementById("select-course");
   }
 
   function fillContact(){
@@ -93,15 +93,68 @@
         themeSelect.appendChild(option)
     })
   }
+
+  function submit(){
+     alert("Hemos recibido su información, muchas gracias y suerte en su actividad")
+  }
+
+  function setInitialValues(){
+    //alert("setting initial values");
+
+    const init_date = document.getElementById("input-init-date")
+    const end_date = document.getElementById("input-end-date")
+
+    let now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    init_date.value = now.toISOString().slice(0,16);
+
+    now.setMinutes(now.getMinutes() + 3*60);
+    end_date.value = now.toISOString().slice(0,16);
+
+    $(function() {
+      $("#dialog-confirm").dialog({
+        autoOpen: false,
+        resizable: false,
+        height: "auto",
+        width: 400,
+        modal: true,
+        buttons: {
+          "Sí, estoy seguro": function() {
+            $(this).dialog("close");
+            if (!document.getElementById("btn-go-back")){
+              submit()
+              const goBackButton = document.createElement("button")
+              goBackButton.setAttribute("id", "btn-go-back")
+              goBackButton.setAttribute("onclick", "window.location='index.html'")
+              goBackButton.innerText = "Volver Atrás"
   
-  document.getElementById("select-region").addEventListener("change", updateCursos);
+              document.getElementById("div-btn-goback").appendChild(goBackButton)
+            }
+          },
+          "No, no estoy seguro": function() {
+            $(this).dialog("close");
+          }
+        }
+      });
+      $( "#btn-submit" ).on( "click", function() {
+        $( "#dialog-confirm" ).dialog( "open" );
+      });
+    });
+  }
+  
+  // selects
+  document.getElementById("select-region").addEventListener("change", updateComunas);
   document.getElementById("select-comuna").addEventListener("change", changeArguments);
   document.getElementById("select-contact").addEventListener("change", updateContactInfo);
   document.getElementById("select-tema").addEventListener("change", updateTema);
+
+  // submit button
+  //document.getElementById("btn-submit").addEventListener("click", submit);
   
   window.onload = () => {
+    setInitialValues();
     fillContact();
     fillTema();
-    poblarDepartamentos();
+    poblarRegiones();
     changeArguments();
   };
