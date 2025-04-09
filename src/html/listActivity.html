@@ -10,8 +10,48 @@
     <header>
         Página Básica
     </header>
+    <dialog id="show-activity-dialog" class="dialog">
+        <form method="dialog">
+            <div class="div-table">
+                <div class="div-table-col">
+                    <div class="div-table-row">Inicio</div>
+                    <div class="div-table-row">Término</div>
+                    <div class="div-table-row">Comuna</div>
+                    <div class="div-table-row">Sector</div>
+                    <div class="div-table-row">Tema</div>
+                    <div class="div-table-row">Nombre Organizador</div>
+                    <div class="div-table-row">Total Fotos</div>
+                </div>
+                <div class="div-table-col">
+                    <div class="div-table-row" id="row-inicio"></div>
+                    <div class="div-table-row" id="row-termino"></div>
+                    <div class="div-table-row" id="row-comuna"></div>
+                    <div class="div-table-row" id="row-sector"></div>
+                    <div class="div-table-row" id="row-tema"></div>
+                    <div class="div-table-row" id="row-name"></div>
+                    <div class="div-table-row" id="row-total-photos"></div>
+                </div>
+            </div>
+            <div class="div-table">
+                <div class="div-table-row" id="row-photos"></div>
+            </div>
+            <div><button id="btn-close" value="close">Cerrar</button></div>
+        </form>
+      </dialog>
+
+      <dialog id="show-picture" class="dialog">
+        <form method="dialog">
+            <!-- Contenedor donde se insertan las imágenes -->
+            <div id="picture-container"></div>
+            
+            <!-- Boton de cerrado-->
+            <div><button value="close">Cerrar</button></div>
+        </form>
+      </dialog>
     <main>
-        <div id="div-content"></div>
+        <form id="form-tbl">
+            <div id="div-content"></div>
+        </form>
     </main>
     <footer>
         &copy; 2025 Mi Página
