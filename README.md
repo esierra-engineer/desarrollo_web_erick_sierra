@@ -30,9 +30,7 @@ Se uso una tabla con CSS en lugar de una \<table\> comun porque permite mejor ad
 
 Cada pagina de la aplicacion tiene su propio codigo HTML y su propio codigo JS a excepción de la portada (index.html).
 
-No alcancé a hacer el detalle en listActivity.html pero la idea es ocupar un dialog que se abra ante un evento onclick sobre cualquier elemento de la fila correspondiente a una actividad.
-
-Tampoco alcancé a hacer la carga de 5 fotos pero la idea es agregar fotos y por cada foto agregada aumentar un contador que, cuando llegue a 5, inhabilite el boton o lo esconda.
+No alcancé a hacer la carga de 5 fotos pero la idea es agregar fotos y por cada foto agregada aumentar un contador que, cuando llegue a 5, inhabilite el boton o lo esconda.
 
 Para statistics usé chart.JS para mostrar graficos mas lindos y con interacciones que una imagen o un plot de python.
 

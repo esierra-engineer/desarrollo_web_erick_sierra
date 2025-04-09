@@ -329,6 +329,17 @@ const poblarRegiones = () => {
     }
   });
 
+  // subir otra imagen
+  document.getElementById("input-foto").addEventListener("input", (e) => {
+    if (!document.getElementById("btn-add-more")){
+      const buttonAddMore = document.createElement("button");
+      buttonAddMore.setAttribute("id", "btn-add-more");
+      buttonAddMore.setAttribute("type", "file");
+      buttonAddMore.innerText = "agregar otra foto";
+      document.getElementById("div-more-photos").appendChild(buttonAddMore);
+    }
+  })
+
   window.onload = () => {
     fillContact();
     fillTema();
