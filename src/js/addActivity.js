@@ -295,6 +295,15 @@ const poblarRegiones = () => {
     let element = document.getElementById("error-msg");
     element.innerText = text;
   }
+
+  function addGoBackButton(){
+    const goBackButton = document.createElement("button");
+    goBackButton.setAttribute("id", "btn-go-back");
+    goBackButton.setAttribute("onclick", "window.location='index.html'");
+    goBackButton.innerText = "Volver Atrás";
+    
+    document.getElementById("div-btn-goback").appendChild(goBackButton);    
+};
   
   // selects
   document.getElementById("select-region").addEventListener("change", updateComunas);
@@ -315,10 +324,11 @@ const poblarRegiones = () => {
   dialog.addEventListener("close", () => {
     if (dialog.returnValue === "confirm") {
       alert("Formulario confirmado");
+      addGoBackButton();
       // document.querySelector("form").submit();
     }
   });
-  
+
   window.onload = () => {
     fillContact();
     fillTema();
