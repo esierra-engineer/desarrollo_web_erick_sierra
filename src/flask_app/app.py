@@ -1,5 +1,6 @@
-from flask import Flask, request, render_template, redirect, url_for, jsonify, flash
+from flask import Flask, jsonify, request, render_template, redirect, url_for, flash
 from database import db
+from utils import form
 
 UPLOAD_FOLDER = "static/uploads"
 
@@ -16,9 +17,11 @@ def index():
 @app.route("/addActivity", methods = ["GET", "POST"])
 def add_activity():
     if request.method == "POST":
-        datos, fotos, temas, contactos = []
-        db.crear_actividad(datos, fotos=fotos, temas=temas, contactos=contactos)
+        datos = form.process_form(request, app)
+        db.crear_actividad(datos)
+        flash("Success!")
         return redirect(url_for('index'))
+    
     return render_template("addActivity.html")
 
 @app.route("/viewList", methods = ["GET", "POST"])
@@ -28,6 +31,7 @@ def list_activity():
 @app.route("/statistics", methods = ["GET", "POST"])
 def statistics():
     return render_template("statistics.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)

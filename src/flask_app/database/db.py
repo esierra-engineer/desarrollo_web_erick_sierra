@@ -2,7 +2,6 @@ import enum
 from sqlalchemy import create_engine, Column, Integer, BigInteger, String, ForeignKey, DateTime, Enum
 from sqlalchemy.orm import sessionmaker, declarative_base, relationship, joinedload
 
-# Credenciales de la base de datos pedidas en el enunciado
 DB_NAME = "tarea2"
 DB_USERNAME = "cc5002"
 DB_PASSWORD = "programacionweb"
@@ -96,7 +95,8 @@ class ActividadTema(Base):
 def get_actividades(limit=10, offset=0):
     session = SessionLocal()
     actividades = session.query(Actividad).options(
-        joinedload(Actividad.comuna).joinedload(Comuna.region),
+        joinedload(Actividad.comuna).
+        joinedload(Comuna.region),
         joinedload(Actividad.fotos),
         joinedload(Actividad.temas),
         joinedload(Actividad.contactos)
@@ -106,81 +106,9 @@ def get_actividades(limit=10, offset=0):
     session.close()
     return actividades
 
-def get_actividad_por_id(id):
-    session = SessionLocal()
-    actividad = session.query(Actividad).options(
-        joinedload(Actividad.comuna).joinedload(Comuna.region),
-        joinedload(Actividad.comuna),
-        joinedload(Actividad.fotos),
-        joinedload(Actividad.temas),
-        joinedload(Actividad.contactos)
-    ).filter_by(id=id).first()
-    session.close()
-    return actividad
-
-def crear_actividad(data, fotos=[], temas=[], contactos=[]):
+def crear_actividad(data):
     session = SessionLocal()
     nueva = Actividad(**data)
-    for f in fotos:
-        nueva.fotos.append(Foto(**f))
-    for t in temas:
-        nueva.temas.append(ActividadTema(**t))
-    for c in contactos:
-        nueva.contactos.append(ContactarPor(**c))
     session.add(nueva)
     session.commit()
     session.close()
-
-def get_regiones():
-    session = SessionLocal()
-    regiones = session.query(Region).all()
-    session.close()
-    return regiones
-
-def get_comunas_por_region(region_id):
-    session = SessionLocal()
-    comunas = session.query(Comuna).filter_by(region_id=region_id).all()
-    resultado = [{"id": c.id, "nombre": c.nombre} for c in comunas]
-    session.close()
-    return resultado
-
-def guardar_contactos(request_form, actividad_id, session):
-    contactos = []
-    if 'whatsapp' in request_form and request_form.get('whatsapp-id'):
-        contactos.append(ContactarPor(
-            nombre=RedSocialEnum.whatsapp,
-            identificador=request_form.get('whatsapp-id'),
-            actividad_id=actividad_id
-        ))
-    if 'telegram' in request_form and request_form.get('telegram-id'):
-        contactos.append(ContactarPor(
-            nombre=RedSocialEnum.telegram,
-            identificador=request_form.get('telegram-id'),
-            actividad_id=actividad_id
-        ))
-    if 'x' in request_form and request_form.get('x-id'):
-        contactos.append(ContactarPor(
-            nombre=RedSocialEnum.x,
-            identificador=request_form.get('x-id'),
-            actividad_id=actividad_id
-        ))
-    if 'instagram' in request_form and request_form.get('instagram-id'):
-        contactos.append(ContactarPor(
-            nombre=RedSocialEnum.instagram,
-            identificador=request_form.get('instagram-id'),
-            actividad_id=actividad_id
-        ))
-    if 'tiktok' in request_form and request_form.get('tiktok-id'):
-        contactos.append(ContactarPor(
-            nombre=RedSocialEnum.tiktok,
-            identificador=request_form.get('tiktok-id'),
-            actividad_id=actividad_id
-        ))
-    if 'otra' in request_form and request_form.get('red') and request_form.get('usuario'):
-        contactos.append(ContactarPor(
-            nombre=RedSocialEnum.otra,
-            identificador=request_form.get('red') + ":" + request_form.get('usuario'),
-            actividad_id=actividad_id
-        ))
-    session.add_all(contactos)
-    session.commit()
