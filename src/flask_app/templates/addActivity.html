@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Básica</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/addActivity.css')}}">
+    <!--<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>-->
+</head>
+<body>
+    <header>
+        Informar Actividad
+    </header>
+    <main>
+      <dialog id="confirm-dialog">
+        <form method="dialog">
+          <p>¿Está seguro que desea agregar esta actividad?</p>
+          <div>
+            <button value="cancel">No, no estoy seguro, quiero volver al formulario</button>
+            <button value="confirm">Sí, estoy seguro</button>
+          </div>
+        </form>
+      </dialog>
+      
+        <form method="post">
+          <div>
+            <h1>Donde</h1>
+            <label for="select-region">Region</label>
+            <select name="Region" id="select-region" required>
+                <option value="">Seleccione una Región</option>
+            </select>
+            <label for="select-comuna">Comuna</label>
+            <select name="Comuna" id="select-comuna" required>
+                <option value="">Seleccione una Comuna</option>
+            </select>
+            <label for="input-text-sector">Sector</label>
+            <input id= "input-text-sector" type="text" maxlength="100" name="Sector">  
+          </div>
+
+          <div>
+          <h1>Quien Organiza</h1>
+
+          <label for="input-text-nombre">Nombre</label>
+          <input id="input-text-nombre" type="text" maxlength="200" required name="Nombre">
+
+          <label for="input-email">email</label>
+          <input id="input-email" type="email" maxlength="100" required name="E-mail">
+
+          <label for="input-tel">Celular</label>
+          <input id="input-tel" type="tel" maxlength="13" name="Celular" placeholder="+569.12345678">
+          
+          <label for="select-contact">Contactar por</label>
+          <select name="Contactar por" id="select-contact">
+            <option value="">Seleccione</option>
+          </select>
+
+          <div id="contact-input"></div>
+          
+        </div>
+        <div>
+          <h1>Cuando y de que trata</h1>
+          <label for="input-init-date">Dia hora Inicio</label>
+          <input type="datetime-local" id="input-init-date" name="Fecha Inicial" required>
+
+        <label for="input-end-date">Dia Hora Termino</label>
+        <input type="datetime-local" id="input-end-date" name="Fecha Final">
+
+        <label for="input-text-descripcion">Descripcion</label>
+        <textarea id="input-text-descripcion" cols="50" rows="10" name="Descripcion"></textarea>
+
+        <label for="select-tema">Tema</label>
+        <select id="select-tema" name="Tema" required>
+          <option label="Seleccione"></option>
+        </select>
+
+        <div id="tema-input"></div>
+
+        <div id="input-photos">
+          <label for="input-foto">Foto</label>
+          <input id="input-foto" type="file" required name="Foto">
+          <div id="div-more-photos"></div>
+        </div>
+      </div>
+        
+        <div>
+          <br>
+          <button id="btn-submit" name="btn-submit" type="submit">Agregar esta actividad</button>
+        </div>
+
+        <div id="error-msg"></div>
+
+        <div id="div-btn-goback">
+          
+        </div>
+
+        </form>
+    </main>
+    <footer>
+        &copy; 2025 Mi Página
+    </footer>
+
+<script src="{{url_for('static', filename='js/region_comuna.js')}}"></script> 
+<script src="{{url_for('static', filename='js/addActivity.js')}}"></script> 
+</body>
+</html>

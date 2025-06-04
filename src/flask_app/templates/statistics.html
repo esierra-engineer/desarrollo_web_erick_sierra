@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Básica</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
+</head>
+<body>
+    <header>
+        Página Básica
+    </header>
+    <main>
+        <h1>Actividades por Dia</h1>
+        <div class="charts">
+            <canvas id="myLineChart"></canvas>
+        </div>
+
+        <h1>Actividades por Tipo</h1>
+        <div class="charts">
+            <canvas id="myPieChart"></canvas>
+        </div>
+
+        <h1>Actividades por Horario</h1>
+        <div class="charts">
+            <canvas id="myBarChart"></canvas>
+        </div>
+        
+        <div id="div-btn-goback" data-index-url="{{ url_for('index') }}"></div>
+    </main>
+    <footer>
+        &copy; 2025 Mi Página
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{url_for('static', filename='js/charts.js')}}"></script>
+</body>
+</html>

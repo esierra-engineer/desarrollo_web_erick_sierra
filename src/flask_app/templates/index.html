@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Básica</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        Página Básica
+    </header>
+    <main>
+        <h1 id="welcome-message">Bienvenido a mi página</h1>
+        <div id="menu">
+            <div>
+                <h1></h1>
+                <form action="{{url_for('add_activity')}}">
+                    <input type="submit" value="Agregar Actividad">
+                </form>
+            </div>
+            <div>
+                <h1></h1>
+                <form action="{{url_for('list_activity')}}">
+                    <input type="submit" value="Ver Listado de Actividades">
+                </form>   
+            </div>
+            <div>
+                <h1></h1>
+                <form action="{{url_for('statistics')}}">
+                    <input type="submit" value="Estadisticas">
+                </form>
+            </div>
+        </div>
+        <div id="last-5-activities">
+            <div class="div-table">
+                <div class="div-table-row">
+                    <div class="div-table-col">Inicio</div>
+                    <div class="div-table-col">Término</div>
+                    <div class="div-table-col">Comuna</div>
+                    <div class="div-table-col">Sector</div>
+                    <div class="div-table-col">Tema</div>
+                    <div class="div-table-col">Foto</div>
+                </div>
+
+                {% for actividad in actividades %}
+    
+                <div class="div-table-row">
+                    <div class="div-table-col">{{ actividad.dia_hora_inicio }}</div>
+                    <div class="div-table-col">{{ actividad.dia_hora_termino }}</div>
+                    <div class="div-table-col">{{ actividad.comuna.nombre }}</div>
+                    <div class="div-table-col">{{ actividad.sector }}</div>
+                    <div class="div-table-col">{{ actividad.temas.tema}}</div>
+                    <div class="div-table-col"><img src="../../resources/act_1.jpg" alt="Actividad" style="width:128px;height:128px;"></div>
+                    
+                </div>
+
+                {% endfor %}
+        
+        </div>
+    </main>
+    <footer>
+        &copy; 2025 Mi Página
+    </footer>
+</body>
+</html>

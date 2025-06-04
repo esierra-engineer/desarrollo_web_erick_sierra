@@ -1,0 +1,9 @@
+  input[type=submit] {
+    background:none;
+    padding:10px;
+  }
+
+  #error-msg{
+    color: #ff0000;
+    font-weight: bold;
+  }
