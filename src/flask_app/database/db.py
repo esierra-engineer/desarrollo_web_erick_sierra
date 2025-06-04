@@ -15,27 +15,6 @@ SessionLocal = sessionmaker(bind=engine)
 
 Base = declarative_base()
 
-# --- Enums ---
-class TemaEnum(enum.Enum):
-    música = "Música"
-    deporte = "Deporte"
-    ciencias = "Ciencias"
-    religión = "Religión"
-    política = "Política"
-    tecnología = "Tecnología"
-    juegos = "Juegos"
-    baile = "Baile"
-    comida = "Comida"
-    otro = "Otro"
-
-class RedSocialEnum(enum.Enum):
-    whatsapp = "WhatsApp"
-    telegram = "Telegram"
-    X = "X"
-    instagram = "Instagram"
-    tiktok = "TikTok"
-    otra = "Otra"
-
 # --- Modelos ---
 class Region(Base):
     __tablename__ = 'region'
@@ -63,9 +42,6 @@ class Actividad(Base):
     dia_hora_termino = Column(DateTime)
     descripcion = Column(String(500))
     comuna = relationship("Comuna", back_populates="actividades")
-    fotos = relationship("Foto", back_populates="actividad", cascade="all, delete-orphan")
-    contactos = relationship("ContactarPor", back_populates="actividad", cascade="all, delete-orphan")
-    temas = relationship("ActividadTema", back_populates="actividad", cascade="all, delete-orphan")
 
 class Foto(Base):
     __tablename__ = 'foto'
@@ -73,33 +49,30 @@ class Foto(Base):
     ruta_archivo = Column(String(300))
     nombre_archivo = Column(String(300))
     actividad_id = Column(Integer, ForeignKey('actividad.id'), nullable=False)
-    actividad = relationship("Actividad", back_populates="fotos")
+    #actividad = relationship("Actividad", back_populates="fotos")
 
 class ContactarPor(Base):
     __tablename__ = 'contactar_por'
     id = Column(Integer, primary_key=True)
-    nombre = Column(Enum(RedSocialEnum))
+    nombre = Column(String(150))
     identificador = Column(String(150))
     actividad_id = Column(Integer, ForeignKey('actividad.id'), nullable=False)
-    actividad = relationship("Actividad", back_populates="contactos")
+    #actividad = relationship("Actividad", back_populates="contactos")
 
 class ActividadTema(Base):
     __tablename__ = 'actividad_tema'
     id = Column(Integer, primary_key=True)
-    tema = Column(Enum(TemaEnum))
+    tema = Column(String(150))
     glosa_otro = Column(String(15))
     actividad_id = Column(Integer, ForeignKey('actividad.id'), nullable=False)
-    actividad = relationship("Actividad", back_populates="temas")
+    #actividad = relationship("Actividad", back_populates="temas")
 
 # --- Funciones útiles ---
 def get_actividades(limit=10, offset=0):
     session = SessionLocal()
     actividades = session.query(Actividad).options(
         joinedload(Actividad.comuna).
-        joinedload(Comuna.region),
-        joinedload(Actividad.fotos),
-        joinedload(Actividad.temas),
-        joinedload(Actividad.contactos)
+        joinedload(Comuna.region)
     ).order_by(Actividad.dia_hora_inicio.desc()).offset(offset).limit(limit).all()    
     for a in actividades:
         session.expunge(a)
